@@ -21,7 +21,7 @@ ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 FROM ${BUILDER_IMAGE} as builder
 
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git \
+RUN apt-get update -y && apt-get install -y build-essential git npm \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # prepare build dir
@@ -36,6 +36,8 @@ ENV MIX_ENV="prod"
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
+COPY apps/hello/mix.exs ./apps/hello/mix.exs
+COPY apps/hello_web/mix.exs ./apps/hello_web/mix.exs
 RUN mix deps.get --only $MIX_ENV
 RUN mkdir config
 
@@ -45,14 +47,17 @@ RUN mkdir config
 COPY config/config.exs config/${MIX_ENV}.exs config/
 RUN mix deps.compile
 
-COPY priv priv
+COPY apps/hello_web/priv apps/hello_web/priv
 
-COPY lib lib
+COPY apps apps
 
-COPY assets assets
+COPY apps/hello_web/assets apps/hello_web/assets
+
+# install dependencies
+RUN cd apps/hello_web/assets && npm install
 
 # compile assets
-RUN mix assets.deploy
+RUN cd apps/hello_web && mix assets.deploy
 
 # Compile the release
 RUN mix compile
@@ -60,7 +65,7 @@ RUN mix compile
 # Changes to config/runtime.exs don't require recompiling the code
 COPY config/runtime.exs config/
 
-COPY rel rel
+COPY apps/hello_web/rel apps/hello_web/rel
 RUN mix release
 
 # start a new build stage so that the final image will only contain
@@ -84,8 +89,9 @@ RUN chown nobody /app
 ENV MIX_ENV="prod"
 
 # Only copy the final release from the build stage
-COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/hello_web ./
+# COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/hello_web ./
+COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/hello_umbrella ./
 
 USER nobody
 
-CMD ["/app/bin/server"]
+ENTRYPOINT ["/app/bin/hello_umbrella"]
