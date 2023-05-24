@@ -49,7 +49,8 @@ RUN mix deps.compile
 
 COPY apps/hello_web/priv apps/hello_web/priv
 
-COPY apps apps
+COPY apps/hello/lib apps/hello/lib
+COPY apps/hello_web/lib apps/hello_web/lib
 
 COPY apps/hello_web/assets apps/hello_web/assets
 
