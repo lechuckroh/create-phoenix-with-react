@@ -1,5 +1,3 @@
-# create phoenix application with react.js
-
-An example projects to use react.js with Phoenix application.
+# phoenix application examples
 
 * [Simple react.js integration](hello_umbrella/)
