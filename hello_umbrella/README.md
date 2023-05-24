@@ -7,7 +7,7 @@ A simple react.js integration in a phoenix application.
 ### Install dependencies
 
 ```shell
-$ mix setup
+$ mix deps.get
 
 $ cd apps/hello_web/assets
 $ pnpm install
