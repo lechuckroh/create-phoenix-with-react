@@ -35,3 +35,7 @@ library_web-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# prod generated files
+/priv/static/favicon-*.ico
+/priv/static/robots-*
+/priv/static/robots.txt.gz

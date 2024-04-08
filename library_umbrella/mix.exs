@@ -7,8 +7,16 @@ defmodule Library.Umbrella.MixProject do
       version: "0.1.0",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      aliases: aliases()
-    ]
+      aliases: aliases(),
+      releases: [
+        library_umbrella: [
+          applications: [
+            library: :permanent,
+            library_web: :permanent
+          ]
+        ]
+      ]
+   ]
   end
 
   # Dependencies can be Hex packages:

@@ -36,6 +36,8 @@ ENV MIX_ENV="prod"
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
+COPY apps/library/mix.exs ./apps/library/mix.exs
+COPY apps/library_web/mix.exs ./apps/library_web/mix.exs
 RUN mix deps.get --only $MIX_ENV
 RUN mkdir config
 
@@ -45,14 +47,15 @@ RUN mkdir config
 COPY config/config.exs config/${MIX_ENV}.exs config/
 RUN mix deps.compile
 
-COPY priv priv
+COPY apps/library_web/priv apps/library_web/priv
 
-COPY lib lib
+COPY apps/library/lib apps/library/lib
+COPY apps/library_web/lib apps/library_web/lib
 
-COPY assets assets
+COPY apps/library_web/assets apps/library_web/assets
 
 # compile assets
-RUN mix assets.deploy
+RUN cd apps/library_web && mix assets.deploy
 
 # Compile the release
 RUN mix compile
@@ -60,7 +63,7 @@ RUN mix compile
 # Changes to config/runtime.exs don't require recompiling the code
 COPY config/runtime.exs config/
 
-COPY rel rel
+COPY apps/library_web/rel apps/library_web/rel
 RUN mix release
 
 # start a new build stage so that the final image will only contain
@@ -85,7 +88,7 @@ RUN chown nobody /app
 ENV MIX_ENV="prod"
 
 # Only copy the final release from the build stage
-COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/library_web ./
+COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/library_umbrella ./
 
 USER nobody
 
@@ -94,4 +97,4 @@ USER nobody
 # above and adding an entrypoint. See https://github.com/krallin/tini for details
 # ENTRYPOINT ["/tini", "--"]
 
-CMD ["/app/bin/server"]
+ENTRYPOINT ["/app/bin/library_umbrella"]

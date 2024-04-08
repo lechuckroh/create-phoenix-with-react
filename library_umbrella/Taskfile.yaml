@@ -1,0 +1,12 @@
+version: 3
+
+tasks:
+  docker-build:
+    cmds:
+      - docker build -t library .
+
+  docker-run:
+    cmds:
+      - docker run --rm -e SECRET_KEY_BASE=$(mix phx.gen.secret) -e DATABASE_URL={{.DATABASE_URL}} -p 4002:4000 library start
+    vars:
+      DATABASE_URL: ecto://library:Passw0rd@host.docker.internal/library
