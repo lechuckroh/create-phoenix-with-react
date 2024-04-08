@@ -1,0 +1,31 @@
+version: 3
+
+tasks:
+  up:
+    cmds:
+      - docker compose up -d
+      - docker compose logs -f
+
+  down:
+    cmds:
+      - docker compose stop
+
+  rm:
+    cmds:
+      - docker compose down --remove-orphans --volumes
+
+  db:
+    cmds:
+      - cmd: docker compose exec -e PGPASSWORD=$DB_PASSWORD postgres psql -h localhost -U $DB_USER
+        silent: true
+    dotenv: [".env"]
+
+  db-bash:
+    cmds:
+      - docker compose exec postgres bash
+
+  redis:
+    cmds:
+      - cmd: docker compose exec redis redis-cli -a "$REDIS_PASSWORD"
+        silent: true
+    dotenv: [".env"]
