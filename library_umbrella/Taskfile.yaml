@@ -1,11 +1,18 @@
 version: 3
 
 tasks:
+  install:
+    summary: "install dependencies"
+    cmds:
+      - mix deps.get
+
   docker-build:
+    summary: "build docker image"
     cmds:
       - docker build -t library .
 
   docker-run:
+    summary: "run production docker container against docker compose database and redis"
     cmds:
       - docker run --rm -e SECRET_KEY_BASE=$(mix phx.gen.secret) -e DATABASE_URL={{.DATABASE_URL}} -p 4002:4000 library start
     vars:

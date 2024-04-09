@@ -34,7 +34,9 @@ defmodule Library.Umbrella.MixProject do
   defp deps do
     [
       # Required to run "mix format" on ~H/.heex files from the umbrella root
-      {:phoenix_live_view, ">= 0.0.0"}
+      {:phoenix_live_view, ">= 0.0.0"},
+      {:redix, "~> 1.4"},
+      {:castore, ">= 0.0.0"}
     ]
   end
 
