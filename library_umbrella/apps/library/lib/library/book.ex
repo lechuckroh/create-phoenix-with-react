@@ -17,5 +17,6 @@ defmodule Library.Book do
     book
     |> cast(attrs, [:title, :isbn, :publication_date, :publisher, :edition])
     |> validate_required([:title, :isbn, :publication_date, :publisher, :edition])
+    |> validate_length(:isbn, is: 13)
   end
 end
