@@ -6,6 +6,11 @@ tasks:
     cmds:
       - mix deps.get
 
+  run:
+    summary: "run dev server"
+    cmds:
+      - mix phx.server
+
   docker-build:
     summary: "build docker image"
     cmds:
