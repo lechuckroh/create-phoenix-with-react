@@ -31,6 +31,16 @@ tasks:
     cmds:
       - task: compose:db
 
+  db-start:
+    summary: "start DB"
+    cmds:
+      - task: compose:start
+
+  db-stop:
+    summary: "stop DB"
+    cmds:
+      - task: compose:stop
+
   #---------------------------------
   # Docker
   #---------------------------------

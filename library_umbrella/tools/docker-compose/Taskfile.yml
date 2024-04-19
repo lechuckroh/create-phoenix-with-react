@@ -1,12 +1,12 @@
 version: 3
 
 tasks:
-  up:
+  start:
     cmds:
       - docker compose up -d
       - docker compose logs -f
 
-  down:
+  stop:
     cmds:
       - docker compose stop
 
