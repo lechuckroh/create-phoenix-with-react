@@ -2,8 +2,8 @@ version: 3
 
 includes:
   compose:
-    taskfile: ../tools/library-compose/Taskfile.yml
-    dir: ../tools/library-compose
+    taskfile: tools/docker-compose/Taskfile.yml
+    dir: tools/docker-compose
 
 tasks:
   install:
@@ -46,4 +46,3 @@ tasks:
       - docker run --rm -e SECRET_KEY_BASE=$(mix phx.gen.secret) -e DATABASE_URL={{.DATABASE_URL}} -p 4002:4000 library start
     vars:
       DATABASE_URL: ecto://library:Passw0rd@host.docker.internal/library
-
