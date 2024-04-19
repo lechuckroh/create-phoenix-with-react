@@ -30,6 +30,9 @@ $ task install
 
 # migrate DB schema
 $ task db-migrate
+
+# insert seed data
+$ task db-seed
 ```
 
 ## Run

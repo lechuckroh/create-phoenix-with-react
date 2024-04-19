@@ -16,6 +16,11 @@ tasks:
     cmds:
       - mix phx.server
 
+  iex:
+    summary: "run IEx"
+    cmds:
+      - iex -S mix
+
   #---------------------------------
   # DB
   #---------------------------------
@@ -25,6 +30,12 @@ tasks:
     dir: apps/library_web
     cmds:
       - mix ecto.migrate
+
+  db-seed:
+    summary: "insert seed data"
+    dir: apps/library
+    cmds:
+      - mix run priv/repo/seeds.exs
 
   db-psql:
     summary: "connect to postgres"
