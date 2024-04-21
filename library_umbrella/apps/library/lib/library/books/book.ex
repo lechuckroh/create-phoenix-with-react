@@ -1,4 +1,4 @@
-defmodule Library.Book do
+defmodule Library.Books.Book do
   use Ecto.Schema
   import Ecto.Changeset
 

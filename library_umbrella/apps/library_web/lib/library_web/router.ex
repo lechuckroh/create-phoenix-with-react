@@ -20,10 +20,10 @@ defmodule LibraryWeb.Router do
     get "/", PageController, :home
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", LibraryWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", LibraryWeb do
+    pipe_through :api
+    resources "/books", BookController, except: [:new, :edit]
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:library_web, :dev_routes) do
