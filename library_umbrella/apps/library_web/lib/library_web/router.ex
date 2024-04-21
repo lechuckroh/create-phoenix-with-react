@@ -18,6 +18,7 @@ defmodule LibraryWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/books", PageController, :books
   end
 
   scope "/api", LibraryWeb do
