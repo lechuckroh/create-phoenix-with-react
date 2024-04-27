@@ -52,11 +52,17 @@ tasks:
     summary: "start DB"
     cmds:
       - task: compose:start
+      - task: db-migrate
 
   db-stop:
     summary: "stop DB"
     cmds:
       - task: compose:stop
+
+  db-rm:
+    summary: "remove DB"
+    cmds:
+      - task: compose:rm
 
   #---------------------------------
   # Docker

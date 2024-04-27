@@ -22,8 +22,11 @@ $ sudo apt-get install inotify-tools
 ## DB
 
 ```shell
-# start DB in docker container
+# start DB in docker container and migrate DB schema
 $ task db-start
+
+# remove docker containers and data
+$ task db-rm
 
 # install dependencies
 $ task install
@@ -31,8 +34,11 @@ $ task install
 # migrate DB schema
 $ task db-migrate
 
+# rollback DB schema 1 step
+$ task db-rollback-1
+
 # insert seed data
-$ task db-seed
+$ task db-seed-data
 ```
 
 ## Run
