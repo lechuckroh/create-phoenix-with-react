@@ -22,6 +22,15 @@ tasks:
       - iex -S mix
 
   #---------------------------------
+  # Web
+  #---------------------------------
+
+  routes:
+    summary: "display routes"
+    cmds:
+      - mix phx.routes LibraryWeb.Router
+
+  #---------------------------------
   # DB
   #---------------------------------
 
