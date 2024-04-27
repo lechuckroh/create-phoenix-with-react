@@ -31,6 +31,12 @@ tasks:
     cmds:
       - mix ecto.migrate
 
+  db-rollback-1:
+    summary: "rollback DB schema migration 1 step"
+    dir: apps/library_web
+    cmds:
+      - mix ecto.rollback --step 1
+
   db-seed:
     summary: "insert seed data"
     dir: apps/library
