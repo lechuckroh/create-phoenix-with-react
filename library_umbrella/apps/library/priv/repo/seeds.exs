@@ -10,7 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias Library.Book
+alias Library.Books.Book
 alias Library.Repo
 
 books_path = "priv/repo/seeds/books.json"

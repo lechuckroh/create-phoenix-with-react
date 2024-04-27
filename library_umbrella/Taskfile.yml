@@ -37,7 +37,7 @@ tasks:
     cmds:
       - mix ecto.rollback --step 1
 
-  db-seed:
+  db-seed-data:
     summary: "insert seed data"
     dir: apps/library
     cmds:
