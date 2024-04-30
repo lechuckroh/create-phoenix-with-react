@@ -1,4 +1,4 @@
-defmodule LibraryWeb.BookJSON do
+defmodule LibraryWeb.BooksJSON do
   alias Library.Books.Book
 
   @doc """

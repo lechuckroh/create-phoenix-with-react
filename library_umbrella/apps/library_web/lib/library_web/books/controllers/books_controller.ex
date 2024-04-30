@@ -1,4 +1,4 @@
-defmodule LibraryWeb.BookController do
+defmodule LibraryWeb.BooksController do
   use LibraryWeb, :controller
 
   alias Library.Books

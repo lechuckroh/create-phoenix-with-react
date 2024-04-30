@@ -1,5 +1,5 @@
 defmodule LibraryWeb.Layouts do
   use LibraryWeb, :html
 
-  embed_templates "layouts/*"
+  embed_templates "../templates/layouts/*"
 end

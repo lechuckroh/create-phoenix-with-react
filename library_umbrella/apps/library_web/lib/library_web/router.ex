@@ -18,12 +18,12 @@ defmodule LibraryWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    get "/books", PageController, :books
+    get "/books", BooksPageController, :index
   end
 
   scope "/api", LibraryWeb do
     pipe_through :api
-    resources "/books", BookController, except: [:new, :edit]
+    resources "/books", BooksController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

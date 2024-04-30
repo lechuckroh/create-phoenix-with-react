@@ -4,8 +4,4 @@ defmodule LibraryWeb.PageController do
   def home(conn, _params) do
     render(conn, :home, layout: false)
   end
-
-  def books(conn, _params) do
-    render(conn, :books)
-  end
 end
