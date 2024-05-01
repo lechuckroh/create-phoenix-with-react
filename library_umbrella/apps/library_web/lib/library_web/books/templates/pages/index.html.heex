@@ -1,4 +1,7 @@
 <section>
-  <h2><.title title={@title} /></h2>
-  <h3>Author</h3>
+  <%= for book <- @books do %>
+    <.book_cover 
+      book={book}
+    />
+  <% end %>
 </section>

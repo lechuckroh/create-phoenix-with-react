@@ -1,7 +1,10 @@
 defmodule LibraryWeb.BooksPageController do
   use LibraryWeb, :controller
 
+  alias Library.Books
+
   def index(conn, _params) do
-    render(conn, :index, title: "foo")
+    books = Books.list_books()
+    render(conn, :index, books: books)
   end
 end
