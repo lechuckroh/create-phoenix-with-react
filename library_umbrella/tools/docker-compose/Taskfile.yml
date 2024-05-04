@@ -9,7 +9,7 @@ tasks:
 
   wait-db:
     cmds:
-      - cmd: docker run --rm -e WAIT_LOGGER_LEVEL=error -e WAIT_HOSTS=host.docker.internal:$DB_PORT ghcr.io/ufoscout/docker-compose-wait:latest /wait
+      - cmd: docker run --rm --add-host=host.docker.internal:host-gateway -e WAIT_LOGGER_LEVEL=error -e WAIT_HOSTS=host.docker.internal:$DB_PORT ghcr.io/ufoscout/docker-compose-wait:latest /wait
         silent: true
       - cmd: echo "DB is ready on $DB_PORT port."
         silent: true
@@ -17,7 +17,7 @@ tasks:
 
   wait-redis:
     cmds:
-      - cmd: docker run --rm -e WAIT_LOGGER_LEVEL=error -e WAIT_HOSTS=host.docker.internal:$REDIS_PORT ghcr.io/ufoscout/docker-compose-wait:latest /wait
+      - cmd: docker run --rm --add-host=host.docker.internal:host-gateway -e WAIT_LOGGER_LEVEL=error -e WAIT_HOSTS=host.docker.internal:$REDIS_PORT ghcr.io/ufoscout/docker-compose-wait:latest /wait
         silent: true
       - cmd: echo "Redis is ready on $REDIS_PORT port."
         silent: true
