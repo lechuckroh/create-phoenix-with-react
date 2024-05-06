@@ -14,6 +14,9 @@ defmodule LibraryWeb.BooksPageHTML do
       <li>Publisher: <%= @book.publisher %></li>
       <li>Publication Date: <%= @book.publication_date %></li>
     </ul>
+    <div class="btn btn-success">
+    Download
+    </div>
     """
   end
 end

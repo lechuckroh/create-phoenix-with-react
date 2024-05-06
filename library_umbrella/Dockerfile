@@ -21,8 +21,9 @@ ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 FROM ${BUILDER_IMAGE} as builder
 
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git \
-    && apt-get clean && rm -f /var/lib/apt/lists/*_*
+RUN apt-get update -y && apt-get install -y build-essential curl git
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && apt-get install node.js -y
+RUN apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # prepare build dir
 WORKDIR /app
@@ -54,6 +55,9 @@ COPY apps/library_web/lib apps/library_web/lib
 
 COPY apps/library_web/assets apps/library_web/assets
 
+# install npm dependencies
+RUN cd apps/library_web/assets && npm install
+
 # compile assets
 RUN cd apps/library_web && mix assets.deploy
 
@@ -70,9 +74,10 @@ RUN mix release
 # the compiled release and other runtime necessities
 FROM ${RUNNER_IMAGE}
 
-RUN apt-get update -y && \
-  apt-get install -y libstdc++6 openssl libncurses5 locales ca-certificates \
-  && apt-get clean && rm -f /var/lib/apt/lists/*_*
+RUN apt-get update -y \
+  && apt-get install -y libstdc++6 openssl libncurses5 locales ca-certificates \
+  && apt-get clean \
+  && rm -f /var/lib/apt/lists/*_*
 
 # Set the locale
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
