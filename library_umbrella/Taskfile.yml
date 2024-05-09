@@ -10,6 +10,7 @@ tasks:
     summary: "install dependencies"
     cmds:
       - mix deps.get
+      - cd apps/library_web/assets && npm install
 
   run:
     summary: "run dev server"

@@ -6,6 +6,7 @@ config :library, Library.Repo,
   password: "Passw0rd",
   hostname: "localhost",
   database: "library",
+  port: 55432,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
